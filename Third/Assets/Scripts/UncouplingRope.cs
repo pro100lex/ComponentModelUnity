@@ -9,20 +9,13 @@ public class UncouplingRope : MonoBehaviour
     {
         _joint = GetComponent<HingeJoint2D>();
     }
-    
-    private void Start()
-    {
-        
-    }
-    
+
     private void Update()
     {
-        
-    }
-
-    private void OnMouseDown()
-    {
-        _joint.enabled = false;
+        if (Input.GetMouseButton(0))
+        {
+            _joint.enabled = false;
+        }
     }
 
 }

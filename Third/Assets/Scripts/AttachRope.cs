@@ -1,31 +1,21 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(HingeJoint2D))]
-[RequireComponent(typeof(Rigidbody2D))]
 public class AttachRope : MonoBehaviour
 {
     private HingeJoint2D _joint;
-    
+
     private void Awake()
     {
         _joint = GetComponent<HingeJoint2D>();
     }
-    
-    private void Start()
-    {
-        
-    }
-    
-    private void Update()
-    {
-        
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.layer == 6)
+        if(other.TryGetComponent(out EndOfRope endOfRope))
         {
-            _joint.connectedBody = collision.gameObject.GetComponent<Rigidbody2D>();
+            _joint.connectedBody = other.gameObject.GetComponent<Rigidbody2D>();
             _joint.enabled = true;
         }
     }
